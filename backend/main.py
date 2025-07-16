@@ -1,11 +1,26 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from agents.summerizationAgent import get_summarization_agent, summarize_content
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:3000"
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class SummarizeRequest(BaseModel):
-    text: str = None
+    text: list = None
 
 @app.post("/summarize")
 async def summarize_endpoint(request: SummarizeRequest = None):

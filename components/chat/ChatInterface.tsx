@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Send, Bot, User } from 'lucide-react'
 import { Agent } from '@/lib/supabase'
-
+import {inputTextToSummerizer} from "../../lib/aiagents"
 interface Message {
   id: string
   content: string
@@ -35,6 +35,8 @@ export function ChatInterface({ agent }: ChatInterfaceProps) {
     e.preventDefault()
     if (!inputMessage.trim()) return
 
+    const { data, error} = await inputTextToSummerizer(inputMessage)
+    // console.log("AI Response:", udata)
     const userMessage: Message = {
       id: Date.now().toString(),
       content: inputMessage,
@@ -58,7 +60,8 @@ export function ChatInterface({ agent }: ChatInterfaceProps) {
       
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: responses[Math.floor(Math.random() * responses.length)],
+        // content: responses[Math.floor(Math.random() * responses.length)],
+        content:data,
         isUser: false,
         timestamp: new Date()
       }

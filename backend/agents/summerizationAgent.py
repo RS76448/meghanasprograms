@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 load_dotenv()
 class SummarizeRequest(BaseModel):
-    text: str = None
+    text: list = None
 async def get_summarization_agent(summarizeRequest:SummarizeRequest):
     """Load documents and create summarization chain"""
     # Load documents (this can be slow, so good to make async)
@@ -18,15 +18,16 @@ async def get_summarization_agent(summarizeRequest:SummarizeRequest):
         # loader = WebBaseLoader("https://lilianweng.github.io/posts/2023-06-23-agent/")
         # docs= loader.load()
         docs=summarizeRequest.text
+        print("Summarization request:", docs)
         # Debug: Check if docs are loaded
         print(f"Loaded {len(docs)} documents")
         if not docs:
             raise ValueError("No documents loaded")
         
         # Debug: Check document content
-        print(f"First doc content length: {len(docs[0].page_content)}")
-        combined_content = "\n\n".join([doc.page_content for doc in docs])
-        
+        print(f"First doc content length: {len(docs[0].get("page_content"))}")
+        combined_content = "\n\n".join([doc.get("page_content") for doc in docs])
+        print(f"Combined content : {combined_content}")
         # Truncate if too long (Gemini has token limits)
         if len(combined_content) > 30000:  # Rough character limit
             combined_content = combined_content[:30000] + "..."
