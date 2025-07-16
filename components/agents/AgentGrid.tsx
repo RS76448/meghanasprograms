@@ -8,13 +8,13 @@ import { motion } from 'framer-motion'
 const sampleAgents: Agent[] = [
   {
     id: '1',
-    name: 'CodeMaster AI',
-    description: 'Expert coding assistant that helps with programming tasks, debugging, and code optimization across multiple languages.',
-    category: 'Development',
+    name: 'Text Summerizer for Blogs',
+    description: 'AI-powered tool for summarizing blog posts and articles into concise summaries.',
+    category: 'Summarization',
     avatar_url: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=400',
     rating: 4.9,
     price: 0,
-    features: ['Code Generation', 'Bug Fixing', 'Code Review', 'Multiple Languages'],
+    features: ['Text Summarization', 'Keyword Extraction', 'Sentiment Analysis', 'Topic Identification'],
     created_at: '2024-01-15T10:00:00Z',
     is_active: true,
     creator_id: 'system'

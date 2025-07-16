@@ -39,6 +39,13 @@ export function Header() {
       toast.success('Signed out successfully')
     }
   }
+  const handleProfile = () => {
+    window.location.href = '/profile'  // Navigate to profile page
+    // Navigate to profile page
+  }
+  const handleSettings = () => {
+
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
@@ -46,7 +53,7 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
-              <Bot className="h-8 w-8 text-purple-600" />
+              <Bot className="h-8 w-8 text-purple-600" onClick={() => window.location.href = '/'}/>
               <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 AgentHub
               </span>
@@ -86,14 +93,14 @@ export function Header() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <DropdownMenuItem className="flex items-center">
+                  <DropdownMenuItem className="flex items-center" onClick={handleProfile}>
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex items-center">
+                  {/* <DropdownMenuItem className="flex items-center" onClick={handleSettings}>
                     <Settings className="mr-2 h-4 w-4" />
                     Settings
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                   <DropdownMenuItem className="flex items-center" onClick={handleSignOut}>
                     <LogOut className="mr-2 h-4 w-4" />
                     Sign Out
